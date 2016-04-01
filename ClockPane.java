@@ -1,35 +1,23 @@
 
+
 import java.util.Calendar; 
 import java.util.GregorianCalendar;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.control.*;
-import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.animation.KeyFrame;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
-import javafx.scene.layout.Pane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.scene.shape.*;
 import javafx.util.*;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
-import javafx.beans.value.WritableObjectValue;
 import javafx.animation.*;
-import java.util.*;
 import javafx.event.*;
 
 public class ClockPane extends Pane {
