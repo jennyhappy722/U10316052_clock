@@ -11,22 +11,21 @@ import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 
 public class ClockAnimation extends Application {
-  @Override // Override the start method in the Application class
-  public void start(Stage primaryStage) {
-    ClockPane clock = new ClockPane(); // Create a clock
-
+  	@Override // Override the start method in the Application class
+  	public void start(Stage primaryStage) {
+    	ClockPane clock = new ClockPane(); // Create a clock
 	clock.animate();
     
 
 
 
     
-    // Create a scene and place it in the stage
-    Scene scene = new Scene(clock, 250, 250);
-    primaryStage.setTitle("ClockAnimation"); // Set the stage title
-    primaryStage.setScene(scene); // Place the scene in the stage
-    primaryStage.show(); // Display the stage
-  }
+    	// Create a scene and place it in the stage
+	Scene scene = new Scene(clock, 250, 250);
+    	primaryStage.setTitle("ClockAnimation"); // Set the stage title
+    	primaryStage.setScene(scene); // Place the scene in the stage
+    	primaryStage.show(); // Display the stage
+  	}
 
   /**
    * The main method is only needed for the IDE with limited
