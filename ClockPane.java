@@ -61,12 +61,6 @@ public class ClockPane extends Pane {
     paintClock();
   }
 
-/*public void stop(){
-	stop.setOnAction(ActionEvent e) ->{
-		stop	
-
-*/
-
 public void animate(){
 
     // Create a handler for animation
@@ -76,13 +70,14 @@ public void animate(){
 	// Create an animation for a running clock
     	Timeline animation = new Timeline(
         new KeyFrame(Duration.millis(1000), eventHandler));
-
+	//add animate
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play(); // Start animation
+        //add pause
 	stop.setOnAction(e ->{ 
 		animation.pause();	
 	});
-
+	//add play
 	playy.setOnAction(e ->{ 
 		animation.play();
 	});
