@@ -37,6 +37,10 @@ public class ClockPane extends Pane {
 	TextField horr=new TextField();
 	TextField mminute=new TextField();
 	TextField ssecond=new TextField();
+	Label label = new Label("hour 0-12");
+	Label labe2 = new Label("minute 0-60");
+	Label labe3 = new Label("second 0-60");
+	Label labe4 = new Label("You can change time");
   
   	/** Construct a default clock with the current time*/
   	public ClockPane() {
@@ -126,8 +130,8 @@ public class ClockPane extends Pane {
 			setHour(getHour()+1);
 		}
 	
-		if(getHour()>24){			
-			setHour(getHour()-24);
+		if(getHour()>12){			
+			setHour(getHour()-12);
 			
 		}
 	
@@ -209,12 +213,16 @@ public class ClockPane extends Pane {
     	getChildren().clear();  
 
 	playy.relocate(175, 220);
-	stop.relocate(50, 220);
-
-	horr.relocate(20, 110);
-	mminute.relocate(20, 140);
-	ssecond.relocate(20, 170);
-    	getChildren().addAll(settime,mminute,ssecond,horr,playy,stop,circle, t1, t2, t3, t4, sLine, mLine, hLine);
+	stop.relocate(40, 220);
+	settime.relocate(85,220);
+	horr.relocate(70, 110);
+	mminute.relocate(70, 140);
+	ssecond.relocate(70, 170);
+	label.relocate(0, 110);
+	labe2.relocate(0, 140);	
+	labe3.relocate(0, 170);	
+	labe4.relocate(500, 200);		
+    	getChildren().addAll(label,labe2,labe3,labe4,settime,mminute,ssecond,horr,playy,stop,circle, t1, t2, t3, t4, sLine, mLine, hLine);
   	}
   
 
