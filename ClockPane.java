@@ -1,4 +1,4 @@
-
+//package chapter14;
 
 import java.util.Calendar; 
 import java.util.GregorianCalendar;
@@ -19,163 +19,215 @@ import javafx.scene.shape.*;
 import javafx.util.*;
 import javafx.animation.*;
 import javafx.event.*;
+import javafx.scene.control.*;
+
+
 
 public class ClockPane extends Pane {
-  private int hour;
-  private int minute;
-  private int second;
+ 	private int hour;
+  	private int minute;
+  	private int second;
+	//setbutton can stop can play
 	Button playy=new Button("play");
 	Button stop=new Button("stop");
+
+	//can chage time
+	Button settime=new Button("change time");
+
+	TextField horr=new TextField();
+	TextField mminute=new TextField();
+	TextField ssecond=new TextField();
   
-  /** Construct a default clock with the current time*/
-  public ClockPane() {
-    setCurrentTime();
-  }
+  	/** Construct a default clock with the current time*/
+  	public ClockPane() {
+    		setCurrentTime();
+  	}
 
-  /** Construct a clock with specified hour, minute, and second */
-  public ClockPane(int hour, int minute, int second) {
-    this.hour = hour;
-    this.minute = minute;
-    this.second = second;
-  }
+  	/** Construct a clock with specified hour, minute, and second */
+  	public ClockPane(int hour, int minute, int second) {
+    		this.hour = hour;
+    		this.minute = minute;
+    		this.second = second;
+  	}
 
-  /** Return hour */
-  public int getHour() {
-    return hour;
-  }
+  	/** Return hour */
+ 	public int getHour() {
+    		return hour;
+  	}
 
-  /** Set a new hour */
-  public void setHour(int hour) {
-    this.hour = hour;
-    paintClock();
-  }
+  	/** Set a new hour */
+  	public void setHour(int hour) {
+    		this.hour = hour;
+    		paintClock();
+  	}
 
-  /** Return minute */
-  public int getMinute() {
-    return minute;
-  }
+  	/** Return minute */
+  	public int getMinute() {
+		return minute;
+  	}
 
-  /** Set a new minute */
-  public void setMinute(int minute) {
-    this.minute = minute;
-    paintClock();
-  }
-
-public void animate(){
-
-    // Create a handler for animation
-    EventHandler<ActionEvent> eventHandler = e -> {
-      setCurrentTime(); // Set a new clock time
-    };
-	// Create an animation for a running clock
-    	Timeline animation = new Timeline(
-        new KeyFrame(Duration.millis(1000), eventHandler));
-	//add animate
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.play(); // Start animation
-        //add pause
-	stop.setOnAction(e ->{ 
-		animation.pause();	
-	});
-	//add play
-	playy.setOnAction(e ->{ 
-		animation.play();
-	});
-}
+  	/** Set a new minute */
+  	public void setMinute(int minute) {
+    		this.minute = minute;
+    		paintClock();
+  	}
 
 
 
+	public void animate(){
+		setCurrentTime();
+    		// Create a handler for animation
+    		EventHandler<ActionEvent> eventHandler = e -> {
+      		 // Set a new clock time
+		gettextt();
+		getTime();
+		paintClock();
+    		};
+		// Create an animation for a running clock
+    		Timeline animation = new Timeline(
+        	new KeyFrame(Duration.millis(1000), eventHandler));
+
+        	animation.setCycleCount(Timeline.INDEFINITE);
+        	animation.play(); // Start animation
+
+		stop.setOnAction(e ->{ 
+			animation.pause();	
+		});
+
+		playy.setOnAction(e ->{ 
+			animation.play();
+		});
+	}
 
 
 
-  /** Return second */
-  public int getSecond() {
-    return second;
-  }
 
-  /** Set a new second */
-  public void setSecond(int second) {
-    this.second = second;
-    paintClock();
-  }
+
+
+	public void gettextt(){
+		settime.setOnAction(e ->{ 
+			setHour(Integer.parseInt(horr.getText()));
+			setMinute(Integer.parseInt(mminute.getText()));
+			setSecond(Integer.parseInt(ssecond.getText()));
+		});
+	}
+
+	public void getTime(){
+
+		int c=1;		
+	
+		
+		if(getSecond()>60){
+			setSecond(getSecond()-60);
+			setMinute(getMinute()+1);
+		}
+		if(getMinute()>60){			
+			setMinute(getMinute()-60);
+			setHour(getHour()+1);
+		}
+	
+		if(getHour()>24){			
+			setHour(getHour()-24);
+			
+		}
+	
+			setSecond(getSecond()+c);
+	}
+
+
+
+  	/** Return second */
+  	public int getSecond() {
+    		return second;
+  	}
+
+  	/** Set a new second */
+  	public void setSecond(int second) {
+    		this.second = second;
+    		paintClock();
+  	}
   
-  /* Set the current time for the clock */
-  public void setCurrentTime() {
-    // Construct a calendar for the current date and time
-    Calendar calendar = new GregorianCalendar();
+  	/* Set the current time for the clock */
+  	public void setCurrentTime() {
+    	// Construct a calendar for the current date and time
+    	Calendar calendar = new GregorianCalendar();
 
-    // Set current hour, minute and second
-    this.hour = calendar.get(Calendar.HOUR_OF_DAY);
-    this.minute = calendar.get(Calendar.MINUTE);
-    this.second = calendar.get(Calendar.SECOND);
+    	// Set current hour, minute and second
+    	this.hour = calendar.get(Calendar.HOUR_OF_DAY);
+    	this.minute = calendar.get(Calendar.MINUTE);
+    	this.second = calendar.get(Calendar.SECOND);
     
-    paintClock(); // Repaint the clock
-  }
+    	paintClock(); // Repaint the clock
+  	}
   
-  /** Paint the clock */
-  private void paintClock() {
-    // Initialize clock parameters
-    double clockRadius = 
-      Math.min(getWidth(), getHeight()) * 0.8 * 0.5;
-    double centerX = getWidth() / 2;
-    double centerY = getHeight() / 2;
+  	/** Paint the clock */
+  	private void paintClock() {
+    	// Initialize clock parameters
+    	double clockRadius = 
+      	Math.min(getWidth(), getHeight()) * 0.8 * 0.5;
+    	double centerX = getWidth() / 2;
+    	double centerY = getHeight() / 2;
 
-    // Draw circle
-    Circle circle = new Circle(centerX, centerY, clockRadius);
-    circle.setFill(Color.WHITE);
-    circle.setStroke(Color.BLACK);
-    Text t1 = new Text(centerX - 5, centerY - clockRadius + 12, "12");
-    Text t2 = new Text(centerX - clockRadius + 3, centerY + 5, "9");
-    Text t3 = new Text(centerX + clockRadius - 10, centerY + 3, "3");
-    Text t4 = new Text(centerX - 3, centerY + clockRadius - 3, "6");
+    	// Draw circle
+    	Circle circle = new Circle(centerX, centerY, clockRadius);
+    	circle.setFill(Color.WHITE);
+    	circle.setStroke(Color.BLACK);
+    	Text t1 = new Text(centerX - 5, centerY - clockRadius + 12, "12");
+    	Text t2 = new Text(centerX - clockRadius + 3, centerY + 5, "9");
+    	Text t3 = new Text(centerX + clockRadius - 10, centerY + 3, "3");
+    	Text t4 = new Text(centerX - 3, centerY + clockRadius - 3, "6");
     
 
 
-    // Draw second hand
-    double sLength = clockRadius * 0.8;
-    double secondX = centerX + sLength * 
-      Math.sin(second * (2 * Math.PI / 60));
-    double secondY = centerY - sLength * 
-      Math.cos(second * (2 * Math.PI / 60));
-    Line sLine = new Line(centerX, centerY, secondX, secondY);
-    sLine.setStroke(Color.RED);
+    	// Draw second hand
+    	double sLength = clockRadius * 0.8;
+    	double secondX = centerX + sLength * 
+      	Math.sin(second * (2 * Math.PI / 60));
+    	double secondY = centerY - sLength * 
+      	Math.cos(second * (2 * Math.PI / 60));
+    	Line sLine = new Line(centerX, centerY, secondX, secondY);
+    	sLine.setStroke(Color.RED);
 
-    // Draw minute hand
-    double mLength = clockRadius * 0.65;
-    double xMinute = centerX + mLength * 
-      Math.sin(minute * (2 * Math.PI / 60));
-    double minuteY = centerY - mLength * 
-      Math.cos(minute * (2 * Math.PI / 60));
-    Line mLine = new Line(centerX, centerY, xMinute, minuteY);
-    mLine.setStroke(Color.BLUE);
+    	// Draw minute hand
+    	double mLength = clockRadius * 0.65;
+    	double xMinute = centerX + mLength * 
+      	Math.sin(minute * (2 * Math.PI / 60));
+    	double minuteY = centerY - mLength * 
+      	Math.cos(minute * (2 * Math.PI / 60));
+    	Line mLine = new Line(centerX, centerY, xMinute, minuteY);
+    	mLine.setStroke(Color.BLUE);
     
-    // Draw hour hand
-    double hLength = clockRadius * 0.5;
-    double hourX = centerX + hLength * 
-      Math.sin((hour % 12 + minute / 60.0) * (2 * Math.PI / 12));
-    double hourY = centerY - hLength *
-      Math.cos((hour % 12 + minute / 60.0) * (2 * Math.PI / 12));
-    Line hLine = new Line(centerX, centerY, hourX, hourY);
-    hLine.setStroke(Color.GREEN);
+    	// Draw hour hand
+    	double hLength = clockRadius * 0.5;
+    	double hourX = centerX + hLength * 
+      	Math.sin((hour % 12 + minute / 60.0) * (2 * Math.PI / 12));
+    	double hourY = centerY - hLength *
+      	Math.cos((hour % 12 + minute / 60.0) * (2 * Math.PI / 12));
+    	Line hLine = new Line(centerX, centerY, hourX, hourY);
+    	hLine.setStroke(Color.GREEN);
     
-    getChildren().clear();  
+    	getChildren().clear();  
 
-	playy.relocate(125, 220);
+	playy.relocate(175, 220);
 	stop.relocate(50, 220);
-    getChildren().addAll(playy,stop,circle, t1, t2, t3, t4, sLine, mLine, hLine);
-  }
+
+	horr.relocate(20, 110);
+	mminute.relocate(20, 140);
+	ssecond.relocate(20, 170);
+    	getChildren().addAll(settime,mminute,ssecond,horr,playy,stop,circle, t1, t2, t3, t4, sLine, mLine, hLine);
+  	}
   
 
 
-  @Override
-  public void setWidth(double width) {
-    super.setWidth(width);
-    paintClock();
-  }
+  	@Override
+  	public void setWidth(double width) {
+    		super.setWidth(width);
+    		paintClock();
+  	}
   
-  @Override
-  public void setHeight(double height) {
-    super.setHeight(height);
-    paintClock();
-  }
+  	@Override
+  	public void setHeight(double height) {
+    		super.setHeight(height);
+    		paintClock();
+  	}
 }
